@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import butterknife.Bind;
+
 /**
  * Created by Ross Feehan on 08/12/2015.
  * Copyright Ross Feehan
@@ -19,8 +21,6 @@ public class WearableListItemLayout extends LinearLayout
     private TextView tubeStatus;
 
     private final float mFadedTextAlpha;
-    private final int mFadedCircleColor;
-    private final int mChosenCircleColor;
 
     public WearableListItemLayout(Context context) {
         this(context, null);
@@ -35,8 +35,6 @@ public class WearableListItemLayout extends LinearLayout
         super(context, attrs, defStyle);
 
         mFadedTextAlpha = 10 / 100f;
-        mFadedCircleColor = getResources().getColor(R.color.grey);
-        mChosenCircleColor = getResources().getColor(R.color.blue);
     }
 
     // Get references to the icon and text in the item layout definition

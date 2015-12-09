@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by Ross Feehan on 08/12/2015.
  * Copyright Ross Feehan
@@ -40,7 +43,6 @@ public class WearableListAdapter extends WearableListView.Adapter{
         tubeLineHolder.tubeLineName.setText(firstList.get(position));
         tubeLineHolder.tubeLineStatus.setText(secondList.get(position));
         tubeLineHolder.itemView.setTag(position);
-
     }
 
     @Override
@@ -48,14 +50,14 @@ public class WearableListAdapter extends WearableListView.Adapter{
         return firstList.size();
     }
 
-    private static class TubeLineHolder extends WearableListView.ViewHolder{
+    public static class TubeLineHolder extends WearableListView.ViewHolder{
 
-        TextView tubeLineName, tubeLineStatus;
+        @Bind(R.id.tubeLineName) TextView tubeLineName;
+        @Bind(R.id.tubeLineStatus) TextView tubeLineStatus;
 
         public TubeLineHolder(View itemView) {
             super(itemView);
-            tubeLineName = (TextView) itemView.findViewById(R.id.tubeLineName);
-            tubeLineStatus = (TextView) itemView.findViewById(R.id.tubeLineStatus);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
