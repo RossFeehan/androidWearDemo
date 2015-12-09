@@ -1,11 +1,9 @@
 package com.ross.feehan.androidweardemo.Data.Utils;
 
-import android.content.Context;
-
 import com.ross.feehan.androidweardemo.Data.Implementations.GetTubeLineStatusImpl;
 import com.ross.feehan.androidweardemo.Data.Interfaces.GetTubeLineStatusInterface;
 import com.ross.feehan.androidweardemo.Logic.Implementations.GetTubeStatusLogicImpl;
-import com.ross.feehan.androidweardemo.View.Utils.AndroidWearDemoApplication;
+import com.ross.feehan.androidweardemo.Utils.AndroidWearDemoApplication;
 
 import javax.inject.Singleton;
 

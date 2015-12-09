@@ -1,4 +1,4 @@
-package com.ross.feehan.androidweardemo.Utils;
+package com.ross.feehan.androidweardemo.Utils.Interfaces;
 
 /**
  * Created by Ross Feehan on 04/12/2015.

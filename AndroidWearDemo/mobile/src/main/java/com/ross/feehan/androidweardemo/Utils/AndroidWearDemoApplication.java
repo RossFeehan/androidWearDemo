@@ -1,4 +1,4 @@
-package com.ross.feehan.androidweardemo.View.Utils;
+package com.ross.feehan.androidweardemo.Utils;
 
 import android.app.Application;
 import android.content.Context;

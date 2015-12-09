@@ -3,7 +3,7 @@ package com.ross.feehan.androidweardemo.Logic.Implementations;
 import com.ross.feehan.androidweardemo.Data.Interfaces.GetTubeLineStatusInterface;
 import com.ross.feehan.androidweardemo.Data.Objects.TubeLine;
 import com.ross.feehan.androidweardemo.Logic.Interfaces.GetTubeStatusLogicInterface;
-import com.ross.feehan.androidweardemo.View.Interfaces.GetTubeLineStatesViewInterface;
+import com.ross.feehan.androidweardemo.Utils.Interfaces.GetTubeLineStatusViewInterface;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class GetTubeStatusLogicImpl implements GetTubeStatusLogicInterface{
 
     private GetTubeLineStatusInterface getTubeLineStatus;
-    private GetTubeLineStatesViewInterface listenerClass;
+    private GetTubeLineStatusViewInterface listenerClass;
 
     //Constructor
     public GetTubeStatusLogicImpl(GetTubeLineStatusInterface getTubeLineStatus){
@@ -24,14 +24,14 @@ public class GetTubeStatusLogicImpl implements GetTubeStatusLogicInterface{
     //INTERFACE METHODS
     //GetTubeStatusLogicInterface METHODS
     @Override
-    public void getTubeLineStatus(GetTubeLineStatesViewInterface listenerClass) {
+    public void getTubeLineStatus(GetTubeLineStatusViewInterface listenerClass) {
         this.listenerClass = listenerClass;
         this.getTubeLineStatus.getTubeStatus(this);
     }
 
     @Override
     public void receiveTubeLineStatus(List<TubeLine> tubeLineStates) {
-        listenerClass.receiveTubeLineStates(tubeLineStates);
+        listenerClass.receiveTubeLineStatus(tubeLineStates);
     }
 
     @Override
