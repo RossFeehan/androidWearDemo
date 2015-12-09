@@ -41,10 +41,6 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
 
         this.ctx = this;
         ButterKnife.bind(this);
-
-        /*List<String> list1 = Arrays.asList(getResources().getStringArray(R.array.list1));
-        List<String> list2 = Arrays.asList(getResources().getStringArray(R.array.list2));
-        listView.setAdapter(new WearableListAdapter(this, list1, list2));*/
     }
 
     //CLASS METHODS
@@ -56,30 +52,9 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
                 .build();
     }
 
-    /*private void requestTubeLineStatus(){
-        PutDataMapRequest putDataMapRequest = PutDataMapRequest.create("/getTubeLineStatus");
-        putDataMapRequest.getDataMap().putString(GET_TUBE_SERVICE_STATUS_KEY, "GetTubeStatus");
-        PutDataRequest putDataRequest = putDataMapRequest.asPutDataRequest();
-        PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi.putDataItem(googleApiClient, putDataRequest);
-    }*/
-
     private void sendMessage(){
         if(node != null && googleApiClient != null && googleApiClient.isConnected()){
-            Toast.makeText(ctx, "Sending Message", Toast.LENGTH_LONG).show();
-           Wearable.MessageApi.sendMessage(googleApiClient, node.getId(), GET_TUBE_SERVICE_STATUS_KEY, null).setResultCallback(
-
-                   new ResultCallback<MessageApi.SendMessageResult>() {
-                       @Override
-                       public void onResult(MessageApi.SendMessageResult sendMessageResult) {
-                           if(sendMessageResult.getStatus().isSuccess()){
-                               Toast.makeText(ctx, "message successful", Toast.LENGTH_LONG).show();
-                           }
-                            if(!sendMessageResult.getStatus().isSuccess()){
-                                Toast.makeText(ctx, "Cannot fetch tube status at this time", Toast.LENGTH_LONG).show();
-                            }
-                       }
-                   }
-           );
+            Wearable.MessageApi.sendMessage(googleApiClient, node.getId(), GET_TUBE_SERVICE_STATUS_KEY, null);
         }
         else{
             Toast.makeText(ctx, "Cannot fetch tube status at this time", Toast.LENGTH_LONG).show();
@@ -116,7 +91,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
 
     @Override
     public void onDataChanged(DataEventBuffer dataEventBuffer) {
-        Toast.makeText(ctx, "Got new Data", Toast.LENGTH_LONG).show();
+        //TODO DISPLAY THE TUBE LINES STATUS HERE
     }
 
     //ACTIVITY LIFECYCLE METHODS
