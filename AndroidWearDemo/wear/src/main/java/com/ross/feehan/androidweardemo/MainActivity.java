@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.wearable.view.WearableListView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -41,6 +43,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     private Node node;
 
     @Bind(R.id.wearable_list) WearableListView listView;
+    @Bind(R.id.progressBar) ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +144,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
                 }
                 else if(dataItem.getUri().getPath().compareTo(TUBE_LINE_STATUS_KEY) == 0){
                     Log.i(CLASS_NAME, "Getting the DataMap List and displaying it");
+                    progressBar.setVisibility(View.INVISIBLE);
                     listView.setAdapter(new WearableListAdapter(ctx, DataMapItem.fromDataItem(dataItem).getDataMap().getDataMapArrayList(TUBE_LINE_STATUS_KEY)));
                 }
             }
