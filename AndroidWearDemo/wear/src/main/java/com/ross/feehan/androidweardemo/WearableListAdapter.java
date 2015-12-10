@@ -2,12 +2,15 @@ package com.ross.feehan.androidweardemo;
 
 import android.content.Context;
 import android.support.wearable.view.WearableListView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
+import com.google.android.gms.wearable.DataMap;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,15 +23,16 @@ public class WearableListAdapter extends WearableListView.Adapter{
 
     private Context ctx;
     private LayoutInflater layoutInflater;
-    private List<String> firstList;
-    private List<String> secondList;
+    private ArrayList<DataMap> tubeLinesStatusDM;
+    private static final String TUBE_LINE_NAME_KEY = "TubeLineName";
+    private static final String TUBE_LINE_STATUS_KEY = "TubeLineStatus";
 
     //Constructor
-    public WearableListAdapter(Context ctx, List<String> firstList, List<String> secondList){
+    public WearableListAdapter(Context ctx, ArrayList<DataMap> dataMap){
         this.ctx = ctx;
         this.layoutInflater = LayoutInflater.from(ctx);
-        this.firstList = firstList;
-        this.secondList = secondList;
+        this.tubeLinesStatusDM = dataMap;
+        Log.i("WearableListAdapter", "Displaying List View Items");
     }
 
     @Override
@@ -38,16 +42,17 @@ public class WearableListAdapter extends WearableListView.Adapter{
 
     @Override
     public void onBindViewHolder(WearableListView.ViewHolder holder, int position) {
+
         TubeLineHolder tubeLineHolder = (TubeLineHolder) holder;
 
-        tubeLineHolder.tubeLineName.setText(firstList.get(position));
-        tubeLineHolder.tubeLineStatus.setText(secondList.get(position));
+        tubeLineHolder.tubeLineName.setText(tubeLinesStatusDM.get(position).getString(TUBE_LINE_NAME_KEY));
+        tubeLineHolder.tubeLineStatus.setText(tubeLinesStatusDM.get(position).getString(TUBE_LINE_STATUS_KEY));
         tubeLineHolder.itemView.setTag(position);
     }
 
     @Override
     public int getItemCount() {
-        return firstList.size();
+        return tubeLinesStatusDM.size();
     }
 
     public static class TubeLineHolder extends WearableListView.ViewHolder{
