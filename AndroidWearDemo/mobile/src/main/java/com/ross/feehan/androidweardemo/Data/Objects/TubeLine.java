@@ -46,6 +46,11 @@ public class TubeLine {
         return tubeStatus;
     }
 
+    /*Method to convert a List of type TubeLine to an ArrayList of type DataMap
+     *Each DataMap will contain the TubeLine name and TubeLineStatus status along with a timestamp
+     * The timestamp is added for sending the data to the wearable device as without this,
+     * Google Api considers the data to be the same as sometimes the tube line status does not change
+     */
     public static ArrayList<DataMap> convertToDataMap(List<TubeLine> tubeLineStatus){
         Log.i("TubeLine", "Converting to DataMap ArrayList");
         ArrayList<DataMap> tubeLinesDM = new ArrayList<DataMap>();

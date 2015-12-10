@@ -52,6 +52,9 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     }
 
     //CLASS METHODS
+    /*Method that creates the Google API Client that will be used to communicate
+     *with the mobile device
+     */
     private void createGoogleApi(){
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)
@@ -60,6 +63,9 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
                 .build();
     }
 
+    /*Method to send message to the mobile device, this method is called when the app is started on the wear device
+     *and starts the process of the data being fetched on the mobile device and sent to the wearable device
+     */
     private void sendMessage(){
         if(node != null && googleApiClient != null && googleApiClient.isConnected()){
             Wearable.MessageApi.sendMessage(googleApiClient, node.getId(), GET_TUBE_SERVICE_STATUS_KEY, null).setResultCallback(
@@ -79,6 +85,9 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         }
     }
 
+    /*Method to get all nodes connected to this wearable device, in this case we want the mobile device
+     *
+     */
     private void resolveNode() {
         Wearable.NodeApi.getConnectedNodes(googleApiClient).setResultCallback(new ResultCallback<NodeApi.GetConnectedNodesResult>() {
             @Override
@@ -93,12 +102,15 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
 
     //INTERFACE METHODS
     //GOOGLE API CLIENT INTERFACE METHODS
+    /*When connceted to Google API, get the nodes connected to this device and
+     *register for Data Listener which will be called when the device receives data
+     *through the Google API Client
+     */
     @Override
     public void onConnected(Bundle bundle) {
         Log.i(CLASS_NAME, "Registering for Wearable Data Listener");
         Wearable.DataApi.addListener(googleApiClient, this);
         resolveNode();
-
     }
 
     @Override
@@ -109,6 +121,11 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     public void onConnectionFailed(ConnectionResult connectionResult) {
     }
 
+    /*This method is called when the device receives new data from the mobile device
+     *through the Google API Client
+     * Here we go through the different data that is sent and complete the relevant actions
+     * @Params DataEventBuffer dataEventBuffer - The new data that has been received
+     */
     @Override
     public void onDataChanged(DataEventBuffer dataEventBuffer) {
         Log.i(CLASS_NAME, "Received Data");
