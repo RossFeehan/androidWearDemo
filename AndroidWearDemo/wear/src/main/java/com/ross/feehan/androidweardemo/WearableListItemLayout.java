@@ -2,6 +2,7 @@ package com.ross.feehan.androidweardemo;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
+import android.media.Image;
 import android.support.wearable.view.WearableListView;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import butterknife.Bind;
 public class WearableListItemLayout extends LinearLayout
         implements WearableListView.OnCenterProximityListener {
 
+    private ImageView tubeLineIV;
     private TextView tubeName;
     private TextView tubeStatus;
 
@@ -43,18 +45,21 @@ public class WearableListItemLayout extends LinearLayout
         super.onFinishInflate();
         // These are defined in the layout file for list items
         // (see next section)
+        tubeLineIV = (ImageView) findViewById(R.id.tubeLineIV);
         tubeName = (TextView) findViewById(R.id.tubeLineName);
         tubeStatus = (TextView) findViewById(R.id.tubeLineStatus);
     }
 
     @Override
     public void onCenterPosition(boolean animate) {
+        tubeLineIV.setAlpha(1f);
         tubeName.setAlpha(1f);
         tubeStatus.setAlpha(1f);
     }
 
     @Override
     public void onNonCenterPosition(boolean animate) {
+        tubeLineIV.setAlpha(mFadedTextAlpha);
         tubeStatus.setAlpha(mFadedTextAlpha);
         tubeName.setAlpha(mFadedTextAlpha);
     }

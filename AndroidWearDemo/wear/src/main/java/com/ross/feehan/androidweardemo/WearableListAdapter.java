@@ -1,11 +1,13 @@
 package com.ross.feehan.androidweardemo;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.wearable.view.WearableListView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.wearable.DataMap;
@@ -24,6 +26,7 @@ public class WearableListAdapter extends WearableListView.Adapter{
     private Context ctx;
     private LayoutInflater layoutInflater;
     private ArrayList<DataMap> tubeLinesStatusDM;
+    private TypedArray tubeLineImages;
     private static final String TUBE_LINE_NAME_KEY = "TubeLineName";
     private static final String TUBE_LINE_STATUS_KEY = "TubeLineStatus";
 
@@ -32,6 +35,7 @@ public class WearableListAdapter extends WearableListView.Adapter{
         this.ctx = ctx;
         this.layoutInflater = LayoutInflater.from(ctx);
         this.tubeLinesStatusDM = dataMap;
+        this.tubeLineImages = ctx.getResources().obtainTypedArray(R.array.tubeLineImages);
         Log.i("WearableListAdapter", "Displaying List View Items");
     }
 
@@ -45,6 +49,7 @@ public class WearableListAdapter extends WearableListView.Adapter{
 
         TubeLineHolder tubeLineHolder = (TubeLineHolder) holder;
 
+        tubeLineHolder.tubeLineIV.setImageDrawable(tubeLineImages.getDrawable(position));
         tubeLineHolder.tubeLineName.setText(tubeLinesStatusDM.get(position).getString(TUBE_LINE_NAME_KEY));
         tubeLineHolder.tubeLineStatus.setText(tubeLinesStatusDM.get(position).getString(TUBE_LINE_STATUS_KEY));
         tubeLineHolder.itemView.setTag(position);
@@ -57,6 +62,7 @@ public class WearableListAdapter extends WearableListView.Adapter{
 
     public static class TubeLineHolder extends WearableListView.ViewHolder{
 
+        @Bind(R.id.tubeLineIV) ImageView tubeLineIV;
         @Bind(R.id.tubeLineName) TextView tubeLineName;
         @Bind(R.id.tubeLineStatus) TextView tubeLineStatus;
 

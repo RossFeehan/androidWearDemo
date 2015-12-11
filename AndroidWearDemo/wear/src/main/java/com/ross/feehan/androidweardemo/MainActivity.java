@@ -3,10 +3,12 @@ package com.ross.feehan.androidweardemo;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.wearable.view.WearableListView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -43,7 +45,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     private Node node;
 
     @Bind(R.id.wearable_list) WearableListView listView;
-    @Bind(R.id.progressBar) ProgressBar progressBar;
+    @Bind(R.id.progressBarLayout) RelativeLayout progressBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,22 +72,29 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
      *and starts the process of the data being fetched on the mobile device and sent to the wearable device
      */
     private void sendMessage(){
-        if(node != null && googleApiClient != null && googleApiClient.isConnected()){
-            Wearable.MessageApi.sendMessage(googleApiClient, node.getId(), GET_TUBE_SERVICE_STATUS_KEY, null).setResultCallback(
-                    new ResultCallback<MessageApi.SendMessageResult>() {
-                        @Override
-                        public void onResult(MessageApi.SendMessageResult sendMessageResult) {
-                            if (sendMessageResult.getStatus().isSuccess()) {
-                                Log.i("MainActivity", "message Successful");
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(node != null && googleApiClient != null && googleApiClient.isConnected()){
+                    Wearable.MessageApi.sendMessage(googleApiClient, node.getId(), GET_TUBE_SERVICE_STATUS_KEY, null).setResultCallback(
+                            new ResultCallback<MessageApi.SendMessageResult>() {
+                                @Override
+                                public void onResult(MessageApi.SendMessageResult sendMessageResult) {
+                                    if (sendMessageResult.getStatus().isSuccess()) {
+                                        Log.i("MainActivity", "message Successful");
+                                    }
+                                }
                             }
-                        }
-                    }
-            );
-            Log.i(CLASS_NAME, "message Sent");
-        }
-        else{
-            Toast.makeText(ctx, "Cannot fetch tube status at this time", Toast.LENGTH_LONG).show();
-        }
+                    );
+                    Log.i(CLASS_NAME, "message Sent");
+                }
+                else{
+                    Toast.makeText(ctx, "Cannot fetch tube status at this time", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, 2000);
+
     }
 
     /*Method to get all nodes connected to this wearable device, in this case we want the mobile device
@@ -134,7 +143,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
         Log.i(CLASS_NAME, "Received Data");
         for(DataEvent dataEvent : dataEventBuffer){
             if(dataEvent.getType() == DataEvent.TYPE_CHANGED){
-                DataItem dataItem = dataEvent.getDataItem();
+                final DataItem dataItem = dataEvent.getDataItem();
 
                 if(dataItem.getUri().getPath().compareTo(NO_INTERNET_ACCESS_KEY) == 0){
                     Toast.makeText(ctx, "Sorry, no internet access at the moment", Toast.LENGTH_LONG).show();
@@ -144,7 +153,8 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
                 }
                 else if(dataItem.getUri().getPath().compareTo(TUBE_LINE_STATUS_KEY) == 0){
                     Log.i(CLASS_NAME, "Getting the DataMap List and displaying it");
-                    progressBar.setVisibility(View.INVISIBLE);
+
+                    progressBarLayout.setVisibility(View.INVISIBLE);
                     listView.setAdapter(new WearableListAdapter(ctx, DataMapItem.fromDataItem(dataItem).getDataMap().getDataMapArrayList(TUBE_LINE_STATUS_KEY)));
                 }
             }

@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="list1">
-        <item>first item</item>
-        <item>second item</item>
-        <item>third item</item>
-        <item>fourth item</item>
-        <item>fifth item</item>
-        <item>sixth item</item>
-    </string-array>
-
-    <string-array name="list2">
-        <item>first item</item>
-        <item>second item</item>
-        <item>third item</item>
-        <item>fourth item</item>
-        <item>fifth item</item>
-        <item>sixth item</item>
-    </string-array>
-
+    <array name="tubeLineImages">
+        <item>@drawable/bakerloo</item>
+        <item>@drawable/central</item>
+        <item>@drawable/circle</item>
+        <item>@drawable/district</item>
+        <item>@drawable/city</item>
+        <item>@drawable/jubilee</item>
+        <item>@drawable/met</item>
+        <item>@drawable/northern</item>
+        <item>@drawable/piccadilly</item>
+        <item>@drawable/victoria</item>
+        <item>@drawable/waterloo</item>
+    </array>
 </resources>
