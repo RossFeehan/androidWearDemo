@@ -15,7 +15,7 @@ import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
 import com.ross.feehan.androidweardemo.Data.Objects.TubeLine;
 import com.ross.feehan.androidweardemo.Logic.Interfaces.GetTubeStatusLogicInterface;
-import com.ross.feehan.androidweardemo.Utils.Interfaces.GetTubeLineStatusViewInterface;
+import com.ross.feehan.androidweardemo.View.Interfaces.GetTubeLineStatusViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,7 @@ package com.ross.feehan.androidweardemo.Logic.Interfaces;
 
 import com.ross.feehan.androidweardemo.Data.Objects.TubeLine;
 import com.ross.feehan.androidweardemo.Utils.Interfaces.NetworkErrorsInterface;
-import com.ross.feehan.androidweardemo.Utils.Interfaces.GetTubeLineStatusViewInterface;
+import com.ross.feehan.androidweardemo.View.Interfaces.GetTubeLineStatusViewInterface;
 
 import java.util.List;
 

@@ -5,6 +5,7 @@ import com.ross.feehan.androidweardemo.Logic.Interfaces.GetTubeStatusLogicInterf
 import com.ross.feehan.androidweardemo.Logic.Implementations.GetTubeStatusLogicImpl;
 import com.ross.feehan.androidweardemo.Utils.AndroidWearDemoApplication;
 import com.ross.feehan.androidweardemo.Utils.ListenerServiceForWear;
+import com.ross.feehan.androidweardemo.View.Activities.MainActivity;
 
 import javax.inject.Singleton;
 
@@ -16,7 +17,7 @@ import dagger.Provides;
  * Copyright Ross Feehan
  */
 
-@Module(injects = {AndroidWearDemoApplication.class, ListenerServiceForWear.class},
+@Module(injects = {AndroidWearDemoApplication.class, ListenerServiceForWear.class, MainActivity.class},
         complete = false,
         library = true)
 public class LogicDIModules {
