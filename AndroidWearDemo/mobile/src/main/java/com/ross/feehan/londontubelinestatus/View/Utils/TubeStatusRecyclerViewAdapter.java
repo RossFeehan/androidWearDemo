@@ -1,6 +1,7 @@
 package com.ross.feehan.londontubelinestatus.View.Utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLine;
 import com.ross.feehan.londontubelinestatus.R;
+import com.ross.feehan.londontubelinestatus.View.Activities.TubeLineInfoActivity;
 
 import java.util.List;
 
@@ -23,8 +25,8 @@ import butterknife.ButterKnife;
  */
 public class TubeStatusRecyclerViewAdapter extends RecyclerView.Adapter<TubeStatusRecyclerViewAdapter.TubeViewHolder>{
 
-    private Context ctx;
-    private List<TubeLine> tubeLineList;
+    private static Context ctx;
+    private static List<TubeLine> tubeLineList;
     private TypedArray tubeLineImages;
 
     //Constructor
@@ -32,6 +34,15 @@ public class TubeStatusRecyclerViewAdapter extends RecyclerView.Adapter<TubeStat
         this.ctx = ctx;
         this.tubeLineList = tubeLines;
         this.tubeLineImages = ctx.getResources().obtainTypedArray(R.array.tubeLineImages);
+    }
+
+    public static void onRowClicked(int position){
+
+        //TODO open new activity from here and pss in the tube line object
+        TubeLine tubeLineSelected = tubeLineList.get(position);
+
+        Intent intent = new Intent(ctx, TubeLineInfoActivity.class);
+        ctx.startActivity(intent);
     }
 
     @Override
@@ -55,7 +66,7 @@ public class TubeStatusRecyclerViewAdapter extends RecyclerView.Adapter<TubeStat
     /*Private class that holds the layout for the card view
      *Uses the view holder pattern
      */
-    public static class TubeViewHolder extends RecyclerView.ViewHolder{
+    public static class TubeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @Bind(R.id.tubeLineIV) ImageView tubeLineIV;
         @Bind(R.id.tubeNameTV) TextView tubeNameTV;
@@ -64,6 +75,12 @@ public class TubeStatusRecyclerViewAdapter extends RecyclerView.Adapter<TubeStat
         public TubeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onRowClicked(getAdapterPosition());
         }
     }
 }
