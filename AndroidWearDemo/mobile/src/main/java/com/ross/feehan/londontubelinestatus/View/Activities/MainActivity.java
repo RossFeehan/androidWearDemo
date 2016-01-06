@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLine;
 import com.ross.feehan.londontubelinestatus.Logic.Interfaces.GetTubeStatusLogicInterface;
@@ -43,15 +44,16 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
         ButterKnife.bind(this);
         this.ctx = this;
 
-        //for swipe to refresh
-        swipeRefreshLayout.setOnRefreshListener(this);
-
         //FOR DI
         ((AndroidWearDemoApplication)getApplication()).getObjectGraph().inject(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.londonTubeStatus));
 
+        //for swipe to refresh
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        //the tube line status
         getTubeStatus.getTubeLineStatus(this);
     }
 
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
 
     @Override
     public void noInternetConnection() {
-
+        Toast.makeText(ctx, "Sorry, no internet connection at the moment", Toast.LENGTH_LONG).show();
     }
 
     //SwipeRefreshLayout.OnRefreshListener Interface methods
