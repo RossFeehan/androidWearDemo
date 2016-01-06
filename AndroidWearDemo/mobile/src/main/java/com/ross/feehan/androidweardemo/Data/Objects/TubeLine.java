@@ -17,13 +17,14 @@ import java.util.List;
 public class TubeLine {
 
     @SerializedName("name") private String tubeName;
+    @SerializedName("id") private String tubeLineID;
     @SerializedName("lineStatuses") private List<TubeLineStatus> tubeStatus;
     private static final String TUBE_LINE_NAME_KEY = "TubeLineName";
     private static final String TUBE_LINE_STATUS_KEY = "TubeLineStatus";
     private static final String TUBE_LINE_STATUS_UPDATE_TIME_KEY = "UpdateTime";
 
     //CONSTRUCTOR
-    public TubeLine(String tubeName, List<TubeLineStatus> status){
+    public TubeLine(String tubeName, String tubeLineID, List<TubeLineStatus> status){
         setTubeName(tubeName);
         setTubeStatus(status);
     }
@@ -33,6 +34,8 @@ public class TubeLine {
         this.tubeName = tubeName;
     }
 
+    public void setTubeLineID(String id){this.tubeLineID = id; }
+
     public void setTubeStatus(List<TubeLineStatus> tubeStatus) {
         this.tubeStatus = tubeStatus;
     }
@@ -41,6 +44,8 @@ public class TubeLine {
     public String getTubeName() {
         return tubeName;
     }
+
+    public String getTubeLineID(){ return tubeLineID; }
 
     public List<TubeLineStatus> getTubeStatus() {
         return tubeStatus;
