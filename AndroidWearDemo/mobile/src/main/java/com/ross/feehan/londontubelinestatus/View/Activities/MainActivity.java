@@ -3,6 +3,7 @@ package com.ross.feehan.londontubelinestatus.View.Activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,12 +27,13 @@ import butterknife.ButterKnife;
  * Created by Ross Feehan on 10/12/2015.
  * Copyright Ross Feehan
  */
-public class MainActivity extends AppCompatActivity implements GetTubeLineStatusViewInterface{
+public class MainActivity extends AppCompatActivity implements GetTubeLineStatusViewInterface, SwipeRefreshLayout.OnRefreshListener {
 
     private Context ctx;
     @Inject GetTubeStatusLogicInterface getTubeStatus;
     @Bind(R.id.tubeRV) RecyclerView tubeRV;
     @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
 
         ButterKnife.bind(this);
         this.ctx = this;
+
+        //for swipe to refresh
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         //FOR DI
         ((AndroidWearDemoApplication)getApplication()).getObjectGraph().inject(this);
@@ -59,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
         tubeRV.setLayoutManager(recyclerViewLayoutManager);
 
         tubeRV.setAdapter(new TubeStatusRecyclerViewAdapter(ctx, tubeLineStatus));
+
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -69,5 +76,12 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     @Override
     public void noInternetConnection() {
 
+    }
+
+    //SwipeRefreshLayout.OnRefreshListener Interface methods
+    @Override
+    public void onRefresh() {
+        swipeRefreshLayout.setRefreshing(true);
+        getTubeStatus.getTubeLineStatus(this);
     }
 }
