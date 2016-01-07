@@ -2,11 +2,13 @@ package com.ross.feehan.londontubelinestatus.Data.Objects;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Ross Feehan on 07/01/2016.
  * Copyright Ross Feehan
  */
-public class PlannedWork {
+public class PlannedWork implements Serializable {
 
     @SerializedName("description")private String plannedWorkDescription;
     @SerializedName("additionalInfo")private String plannedWorkAddInfo;

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLine;
+import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLinePlannedWork;
 import com.ross.feehan.londontubelinestatus.R;
 import com.ross.feehan.londontubelinestatus.View.Activities.TubeLineInfoActivity;
 
@@ -31,6 +32,7 @@ public class TubeStatusRecyclerViewAdapter extends RecyclerView.Adapter<TubeStat
 
     private static Context ctx;
     private static List<TubeLine> tubeLineList;
+    private static List<TubeLinePlannedWork> tubeLinePlannedWorks;
     private static TypedArray tubeLineImages;
     private static List<String> tubeLineHexColours;
     private static List<String> statusBarColours;
@@ -40,9 +42,10 @@ public class TubeStatusRecyclerViewAdapter extends RecyclerView.Adapter<TubeStat
     private static final String STATUSBARHEXCOLOUR = "StatusBarHexColour";
 
     //Constructor
-    public TubeStatusRecyclerViewAdapter(Context ctx, List<TubeLine> tubeLines){
+    public TubeStatusRecyclerViewAdapter(Context ctx, List<TubeLine> tubeLines, List<TubeLinePlannedWork> tubeLinePlannedWorks){
         this.ctx = ctx;
         this.tubeLineList = tubeLines;
+        this.tubeLinePlannedWorks = tubeLinePlannedWorks;
         this.tubeLineImages = ctx.getResources().obtainTypedArray(R.array.tubeLineImages);
         this.tubeLineHexColours = Arrays.asList(ctx.getResources().getStringArray(R.array.tubeLineColours));
         this.statusBarColours = Arrays.asList(ctx.getResources().getStringArray(R.array.statusBarColours));

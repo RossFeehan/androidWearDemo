@@ -11,10 +11,13 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLine;
+import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLinePlannedWork;
+import com.ross.feehan.londontubelinestatus.Logic.Interfaces.GetTubeLinesPlannedDisruptionsLogicInterface;
 import com.ross.feehan.londontubelinestatus.Logic.Interfaces.GetTubeStatusLogicInterface;
 import com.ross.feehan.londontubelinestatus.R;
 import com.ross.feehan.londontubelinestatus.Utils.AndroidWearDemoApplication;
 import com.ross.feehan.londontubelinestatus.View.Interfaces.GetTubeLineStatusViewInterface;
+import com.ross.feehan.londontubelinestatus.View.Interfaces.GetTubeLinesPlannedDisruptionsViewInterface;
 import com.ross.feehan.londontubelinestatus.View.Utils.TubeStatusRecyclerViewAdapter;
 
 import java.util.List;
@@ -28,10 +31,12 @@ import butterknife.ButterKnife;
  * Created by Ross Feehan on 10/12/2015.
  * Copyright Ross Feehan
  */
-public class MainActivity extends AppCompatActivity implements GetTubeLineStatusViewInterface, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends AppCompatActivity implements GetTubeLineStatusViewInterface, GetTubeLinesPlannedDisruptionsViewInterface, SwipeRefreshLayout.OnRefreshListener {
 
     private Context ctx;
+    private List<TubeLine> tubeLineStatusList;
     @Inject GetTubeStatusLogicInterface getTubeStatus;
+    @Inject GetTubeLinesPlannedDisruptionsLogicInterface getPlannedWorks;
     @Bind(R.id.tubeRV) RecyclerView tubeRV;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
@@ -61,11 +66,19 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     //GetTubeLineStatusViewInterface methods
     @Override
     public void receiveTubeLineStatus(List<TubeLine> tubeLineStatus) {
+        this.tubeLineStatusList = tubeLineStatus;
+        //now get the planned works
+        getPlannedWorks.getTubeLinesPlannedDisruptions(this);
+    }
+
+    //GetTubeLinesPlannedDisruptionsViewInterface INTERFACE METHODS
+    @Override
+    public void receiveTubeLinePlannedDisruptions(List<TubeLinePlannedWork> tubeLinePlannedWorks) {
         //Creating the layout of the recycler view (linearlayout creates a list view like recycler view)
         LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(ctx);
         tubeRV.setLayoutManager(recyclerViewLayoutManager);
 
-        tubeRV.setAdapter(new TubeStatusRecyclerViewAdapter(ctx, tubeLineStatus));
+        tubeRV.setAdapter(new TubeStatusRecyclerViewAdapter(ctx, tubeLineStatusList, tubeLinePlannedWorks));
 
         swipeRefreshLayout.setRefreshing(false);
     }

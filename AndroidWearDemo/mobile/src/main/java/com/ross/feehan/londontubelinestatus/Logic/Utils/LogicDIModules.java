@@ -1,6 +1,9 @@
 package com.ross.feehan.londontubelinestatus.Logic.Utils;
 
 import com.ross.feehan.londontubelinestatus.Data.Interfaces.GetTubeLineStatusInterface;
+import com.ross.feehan.londontubelinestatus.Data.Interfaces.GetTubeLinesPlannedDisruptionsInterface;
+import com.ross.feehan.londontubelinestatus.Logic.Implementations.GetTubeLinesPlannedDisruptionsLogicImpl;
+import com.ross.feehan.londontubelinestatus.Logic.Interfaces.GetTubeLinesPlannedDisruptionsLogicInterface;
 import com.ross.feehan.londontubelinestatus.Logic.Interfaces.GetTubeStatusLogicInterface;
 import com.ross.feehan.londontubelinestatus.Logic.Implementations.GetTubeStatusLogicImpl;
 import com.ross.feehan.londontubelinestatus.Utils.AndroidWearDemoApplication;
@@ -23,9 +26,15 @@ import dagger.Provides;
 public class LogicDIModules {
 
     private GetTubeStatusLogicImpl getTubeStatusLogic;
+    private GetTubeLinesPlannedDisruptionsLogicImpl getPlannedDisruptionsLogic;
 
     @Provides @Singleton
     public GetTubeStatusLogicInterface provideGetTubeStatusLogicImpl(GetTubeLineStatusInterface getTubeLineStatusInterface){
         return getTubeStatusLogic = new GetTubeStatusLogicImpl(getTubeLineStatusInterface);
+    }
+
+    @Provides @Singleton
+    public GetTubeLinesPlannedDisruptionsLogicInterface providesGetTubeLinesPlannedDisruptionsLogicInterface(GetTubeLinesPlannedDisruptionsInterface getPlannedDisruptionsInterface){
+        return getPlannedDisruptionsLogic = new GetTubeLinesPlannedDisruptionsLogicImpl(getPlannedDisruptionsInterface);
     }
 }
