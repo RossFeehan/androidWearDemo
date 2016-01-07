@@ -26,6 +26,7 @@ public class TubeLine implements Serializable {
     //CONSTRUCTOR
     public TubeLine(String tubeName, String tubeLineID, List<TubeLineStatus> status){
         setTubeName(tubeName);
+        setTubeLineID(tubeLineID);
         setTubeStatus(status);
     }
 

@@ -32,7 +32,7 @@ public class TubeLineInfoActivity extends AppCompatActivity {
     @Bind(R.id.tubeLineStatusCV) CardView tubeLineStatusCV;
     TextView tubeLineStatusCVHeaderTV, tubeLineStatusCVStatusTV, tubeLineStatusCVBodyTV;
     @Bind(R.id.tubeLinePlannedDisruptions) CardView tubeLineDisruptionsCV;
-    TextView tubeLineDisruptionsCVHeaderTV, tubeLineDisruptionsCVStatusTV, tubeLineDisruptionsCVBodyTV;
+    TextView tubeLineDisruptionsCVHeaderTV, tubeLineDisruptionsCVStatusTV, tubeLineDisruptionsCVBodyTV, tubeLineDisruptionsCVAddInfoTV;
     @Bind(R.id.tubeLineIV) ImageView tubeLineIV;
     private static final String TUBELINEOBJECT = "TubeLineObject";
     private static final String TUBELINEIMAGE = "TubeLineImage";
@@ -73,6 +73,8 @@ public class TubeLineInfoActivity extends AppCompatActivity {
         }
 
         setCardViewViews();
+
+        //TODO IMPLEMENT PULL DOWN TO REFRESH
     }
 
     private void setCardViewViews(){
@@ -84,6 +86,7 @@ public class TubeLineInfoActivity extends AppCompatActivity {
         tubeLineStatusCVStatusTV = ButterKnife.findById(tubeLineStatusCV, R.id.statusTV);
         tubeLineStatusCVStatusTV.setText(tubeLine.getTubeStatus().get(0).getTubeLineStatus());
 
+        //display the reason for the tube line status if there is one
         tubeLineStatusCVBodyTV = ButterKnife.findById(tubeLineStatusCV, R.id.bodyTV);
         if(tubeLine.getTubeStatus().get(0).getStatusReason() != null){
             tubeLineStatusCVBodyTV.setText(tubeLine.getTubeStatus().get(0).getStatusReason());
@@ -98,10 +101,10 @@ public class TubeLineInfoActivity extends AppCompatActivity {
         tubeLineDisruptionsCVStatusTV.setText(getResources().getString(R.string.noDisruptions));
 
         tubeLineDisruptionsCVBodyTV = ButterKnife.findById(tubeLineDisruptionsCV, R.id.bodyTV);
+        tubeLineDisruptionsCVAddInfoTV = ButterKnife.findById(tubeLineDisruptionsCV, R.id.addInfoTV);
 
         //TODO, GET THE PLANNED DISRUPTIONS FROM TFL API AND DISPLAY HERE IF THERE ARE ANY
 
-        //TODO IMPLEMENT PULL DOWN TO REFRESH
     }
 
     @Override
