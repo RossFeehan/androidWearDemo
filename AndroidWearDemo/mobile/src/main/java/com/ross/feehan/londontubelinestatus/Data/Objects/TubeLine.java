@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.android.gms.wearable.DataMap;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by Ross Feehan on 04/12/2015.
  * Copyright Ross Feehan
  */
-public class TubeLine {
+public class TubeLine implements Serializable {
 
     @SerializedName("name") private String tubeName;
     @SerializedName("id") private String tubeLineID;

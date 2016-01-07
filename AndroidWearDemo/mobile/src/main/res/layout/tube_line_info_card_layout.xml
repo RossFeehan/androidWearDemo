@@ -15,17 +15,28 @@
             android:id="@+id/headingTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/statusTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/headingTV"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/bodyTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/headingTV"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_below="@+id/statusTV"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"/>
 
     </RelativeLayout>
 

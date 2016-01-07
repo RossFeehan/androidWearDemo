@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Tube Line Status</string>
     <string name="londonTubeStatus">London Tube Status</string>
+    <string name="status">Status</string>
+    <string name="disruptions">Planned Disruptions</string>
+    <string name="noDisruptions">No planned disruptions</string>
 </resources>

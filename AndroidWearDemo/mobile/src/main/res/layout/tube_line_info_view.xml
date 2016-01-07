@@ -12,11 +12,20 @@
         app:titleTextColor="@android:color/white"
         android:background="@color/mainColor"/>
 
+    <ImageView
+        android:id="@+id/tubeLineIV"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"/>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar">
+        android:layout_below="@id/tubeLineIV">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,13 +37,15 @@
                      android:id="@+id/tubeLineStatusCV"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
-                     android:layout_marginTop="5dp"/>
+                     android:layout_marginTop="5dp"
+                     android:layout_marginBottom="4dp"/>
 
             <include layout="@layout/tube_line_info_card_layout"
                      android:id="@+id/tubeLinePlannedDisruptions"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
-                     android:layout_below="@id/tubeLineStatusCV"/>
+                     android:layout_below="@id/tubeLineStatusCV"
+                     android:layout_marginBottom="4dp"/>
 
         </RelativeLayout>
 

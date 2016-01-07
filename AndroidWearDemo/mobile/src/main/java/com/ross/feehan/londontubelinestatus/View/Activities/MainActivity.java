@@ -72,12 +72,13 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
 
     @Override
     public void somethingWentWrong(String message) {
-
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void noInternetConnection() {
         Toast.makeText(ctx, "Sorry, no internet connection at the moment", Toast.LENGTH_LONG).show();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     //SwipeRefreshLayout.OnRefreshListener Interface methods

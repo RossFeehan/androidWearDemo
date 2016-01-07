@@ -3,6 +3,9 @@ package com.ross.feehan.londontubelinestatus.View.Utils;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,7 @@ import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLine;
 import com.ross.feehan.londontubelinestatus.R;
 import com.ross.feehan.londontubelinestatus.View.Activities.TubeLineInfoActivity;
 
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -27,21 +31,30 @@ public class TubeStatusRecyclerViewAdapter extends RecyclerView.Adapter<TubeStat
 
     private static Context ctx;
     private static List<TubeLine> tubeLineList;
-    private TypedArray tubeLineImages;
+    private static TypedArray tubeLineImages;
+    private static List<String> tubeLineHexColours;
+    private static List<String> statusBarColours;
+    private static final String TUBELINEOBJECT = "TubeLineObject";
+    private static final String TUBELINEIMAGE = "TubeLineImage";
+    private static final String TUBELINEHEXCOLOUR = "TubeLineHexColour";
+    private static final String STATUSBARHEXCOLOUR = "StatusBarHexColour";
 
     //Constructor
     public TubeStatusRecyclerViewAdapter(Context ctx, List<TubeLine> tubeLines){
         this.ctx = ctx;
         this.tubeLineList = tubeLines;
         this.tubeLineImages = ctx.getResources().obtainTypedArray(R.array.tubeLineImages);
+        this.tubeLineHexColours = Arrays.asList(ctx.getResources().getStringArray(R.array.tubeLineColours));
+        this.statusBarColours = Arrays.asList(ctx.getResources().getStringArray(R.array.statusBarColours));
     }
 
     public static void onRowClicked(int position){
 
-        //TODO open new activity from here and pss in the tube line object
-        TubeLine tubeLineSelected = tubeLineList.get(position);
-
         Intent intent = new Intent(ctx, TubeLineInfoActivity.class);
+        intent.putExtra(TUBELINEOBJECT, tubeLineList.get(position));
+        intent.putExtra(TUBELINEIMAGE, tubeLineImages.getResourceId(position, 0));
+        intent.putExtra(TUBELINEHEXCOLOUR, tubeLineHexColours.get(position));
+        intent.putExtra(STATUSBARHEXCOLOUR, statusBarColours.get(position));
         ctx.startActivity(intent);
     }
 
