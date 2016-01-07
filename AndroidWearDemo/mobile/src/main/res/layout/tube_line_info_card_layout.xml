@@ -9,7 +9,10 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="8dp">
 
         <TextView
             android:id="@+id/headingTV"
@@ -34,8 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/statusTV"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"/>
 
         <TextView
@@ -43,8 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bodyTV"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"/>
 
     </RelativeLayout>

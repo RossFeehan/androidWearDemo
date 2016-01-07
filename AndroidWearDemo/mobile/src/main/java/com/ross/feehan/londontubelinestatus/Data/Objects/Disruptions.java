@@ -10,10 +10,11 @@ import java.io.Serializable;
  */
 public class Disruptions implements Serializable{
 
+
     @SerializedName("disruption")private PlannedWork plannedWork;
 
     //CONSTRUCTOR
-    public Disruptions(PlannedWork plannedWork){
+    public Disruptions(PlannedWork plannedWork, String disruptionHeader){
         setPlannedWork(plannedWork);
     }
 

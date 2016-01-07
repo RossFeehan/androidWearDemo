@@ -10,16 +10,20 @@ import java.io.Serializable;
  */
 public class PlannedWork implements Serializable {
 
+    @SerializedName("categoryDescription") String plannedWorkHeader;
     @SerializedName("description")private String plannedWorkDescription;
     @SerializedName("additionalInfo")private String plannedWorkAddInfo;
 
     //CONSTRUCTOR
-    public PlannedWork(String description, String addInfo){
+    public PlannedWork(String header, String description, String addInfo){
+        setPlannedWorkHeader(header);
         setPlannedWorkDescription(description);
         setPlannedWorkAddInfo(addInfo);
     }
 
     //SETTERS
+    public void setPlannedWorkHeader(String header){ this.plannedWorkHeader = header; }
+
     public void setPlannedWorkDescription(String plannedWorkDescription) {
         this.plannedWorkDescription = plannedWorkDescription;
     }
@@ -29,6 +33,8 @@ public class PlannedWork implements Serializable {
     }
 
     //GETTERS
+    public String getPlannedWorkHeader() { return plannedWorkHeader; }
+
     public String getPlannedWorkDescription() {
         return plannedWorkDescription;
     }

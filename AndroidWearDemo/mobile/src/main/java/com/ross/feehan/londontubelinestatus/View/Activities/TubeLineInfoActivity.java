@@ -3,7 +3,6 @@ package com.ross.feehan.londontubelinestatus.View.Activities;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -33,17 +32,13 @@ public class TubeLineInfoActivity extends AppCompatActivity {
     @Bind(R.id.tubeLineStatusCV) CardView tubeLineStatusCV;
     TextView tubeLineStatusCVHeaderTV, tubeLineStatusCVStatusTV, tubeLineStatusCVBodyTV;
     @Bind(R.id.tubeLinePlannedDisruptions) CardView tubeLineDisruptionsCV;
-    TextView tubeLineDisruptionsCVHeaderTV, tubeLineDisruptionsCVStatusTV, tubeLineDisruptionsCVBodyTV, tubeLineDisruptionsCVAddInfoTV;
+    TextView tubeLineDisruptionsCVHeaderTV, tubeLineDisruptionsCVStatusTV, tubeLineDisruptionsCVBodyTV, getTubeLineDisruptionsCVAddInfoTV;
     @Bind(R.id.tubeLineIV) ImageView tubeLineIV;
     private static final String TUBELINEOBJECT = "TubeLineObject";
     private static final String PLANNEDWORKSOBJECT = "PlannedWorksObject";
     private static final String TUBELINEIMAGE = "TubeLineImage";
     private static final String TUBELINEHEXCOLOUR = "TubeLineHexColour";
     private static final String STATUSBARHEXCOLOUR = "StatusBarHexColour";
-    private String tubeLineColour;
-    private String statusBarColour;
-    private TubeLine tubeLine;
-    private TubeLinePlannedWork tubeLinePlannedWork;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -54,16 +49,13 @@ public class TubeLineInfoActivity extends AppCompatActivity {
         this.ctx = this;
 
         //get all the extras from the intent sent from the recycler adapter
-        tubeLine = (TubeLine) getIntent().getSerializableExtra(TUBELINEOBJECT);
-        tubeLinePlannedWork = (TubeLinePlannedWork) getIntent().getSerializableExtra(PLANNEDWORKSOBJECT);
+        TubeLine tubeLine = (TubeLine) getIntent().getSerializableExtra(TUBELINEOBJECT);
         tubeLineIV.setImageResource(getIntent().getIntExtra(TUBELINEIMAGE, 0));
-        tubeLineColour = getIntent().getStringExtra(TUBELINEHEXCOLOUR);
-        statusBarColour = getIntent().getStringExtra(STATUSBARHEXCOLOUR);
 
         //set up the toolbar
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(tubeLine.getTubeName());
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(tubeLineColour)));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(getIntent().getStringExtra(TUBELINEHEXCOLOUR))));
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -73,15 +65,14 @@ public class TubeLineInfoActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor(statusBarColour));
+            window.setStatusBarColor(Color.parseColor(getIntent().getStringExtra(STATUSBARHEXCOLOUR)));
         }
 
-        setCardViewViews();
-
-        //TODO IMPLEMENT PULL DOWN TO REFRESH
+        setCardViewViews(tubeLine, (TubeLinePlannedWork) getIntent().getSerializableExtra(PLANNEDWORKSOBJECT),
+                getIntent().getStringExtra(TUBELINEHEXCOLOUR));
     }
 
-    private void setCardViewViews(){
+    private void setCardViewViews(TubeLine tubeLine, TubeLinePlannedWork plannedWork, String tubeLineColour){
         //The views within the tube line status card
         tubeLineStatusCVHeaderTV = ButterKnife.findById(tubeLineStatusCV, R.id.headingTV);
         tubeLineStatusCVHeaderTV.setText(getResources().getString(R.string.status));
@@ -102,13 +93,18 @@ public class TubeLineInfoActivity extends AppCompatActivity {
         tubeLineDisruptionsCVHeaderTV.setTextColor(Color.parseColor(tubeLineColour));
 
         tubeLineDisruptionsCVStatusTV = ButterKnife.findById(tubeLineDisruptionsCV, R.id.statusTV);
-        tubeLineDisruptionsCVStatusTV.setText(getResources().getString(R.string.noDisruptions));
-
         tubeLineDisruptionsCVBodyTV = ButterKnife.findById(tubeLineDisruptionsCV, R.id.bodyTV);
-        tubeLineDisruptionsCVAddInfoTV = ButterKnife.findById(tubeLineDisruptionsCV, R.id.addInfoTV);
+        getTubeLineDisruptionsCVAddInfoTV = ButterKnife.findById(tubeLineDisruptionsCV, R.id.addInfoTV);
 
-        //TODO, GET THE PLANNED DISRUPTIONS FROM TFL API AND DISPLAY HERE IF THERE ARE ANY
-
+        //display the planned work if there is any
+        if(plannedWork.getDisruptions().get(0).getPlannedWork() != null){
+            tubeLineDisruptionsCVStatusTV.setText(plannedWork.getDisruptions().get(0).getPlannedWork().getPlannedWorkHeader());
+            tubeLineDisruptionsCVBodyTV.setText(plannedWork.getDisruptions().get(0).getPlannedWork().getPlannedWorkDescription());
+            getTubeLineDisruptionsCVAddInfoTV.setText(plannedWork.getDisruptions().get(0).getPlannedWork().getPlannedWorkAddInfo());
+        }
+        else{
+            tubeLineDisruptionsCVStatusTV.setText(getResources().getString(R.string.noDisruptions));
+        }
     }
 
     @Override

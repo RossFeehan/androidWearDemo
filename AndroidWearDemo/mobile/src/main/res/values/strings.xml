@@ -2,6 +2,6 @@
     <string name="app_name">London Tube Status</string>
     <string name="londonTubeStatus">London Tube Status</string>
     <string name="status">Status</string>
-    <string name="disruptions">Planned Works</string>
+    <string name="disruptions">Disruptions</string>
     <string name="noDisruptions">No planned works</string>
 </resources>
