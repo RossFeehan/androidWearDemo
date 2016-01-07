@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLine;
+import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLinePlannedWork;
 import com.ross.feehan.londontubelinestatus.R;
 
 import butterknife.Bind;
@@ -35,12 +36,14 @@ public class TubeLineInfoActivity extends AppCompatActivity {
     TextView tubeLineDisruptionsCVHeaderTV, tubeLineDisruptionsCVStatusTV, tubeLineDisruptionsCVBodyTV, tubeLineDisruptionsCVAddInfoTV;
     @Bind(R.id.tubeLineIV) ImageView tubeLineIV;
     private static final String TUBELINEOBJECT = "TubeLineObject";
+    private static final String PLANNEDWORKSOBJECT = "PlannedWorksObject";
     private static final String TUBELINEIMAGE = "TubeLineImage";
     private static final String TUBELINEHEXCOLOUR = "TubeLineHexColour";
     private static final String STATUSBARHEXCOLOUR = "StatusBarHexColour";
     private String tubeLineColour;
     private String statusBarColour;
     private TubeLine tubeLine;
+    private TubeLinePlannedWork tubeLinePlannedWork;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -52,6 +55,7 @@ public class TubeLineInfoActivity extends AppCompatActivity {
 
         //get all the extras from the intent sent from the recycler adapter
         tubeLine = (TubeLine) getIntent().getSerializableExtra(TUBELINEOBJECT);
+        tubeLinePlannedWork = (TubeLinePlannedWork) getIntent().getSerializableExtra(PLANNEDWORKSOBJECT);
         tubeLineIV.setImageResource(getIntent().getIntExtra(TUBELINEIMAGE, 0));
         tubeLineColour = getIntent().getStringExtra(TUBELINEHEXCOLOUR);
         statusBarColour = getIntent().getStringExtra(STATUSBARHEXCOLOUR);

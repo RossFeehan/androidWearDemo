@@ -37,6 +37,7 @@ public class TubeStatusRecyclerViewAdapter extends RecyclerView.Adapter<TubeStat
     private static List<String> tubeLineHexColours;
     private static List<String> statusBarColours;
     private static final String TUBELINEOBJECT = "TubeLineObject";
+    private static final String PLANNEDWORKSOBJECT = "PlannedWorksObject";
     private static final String TUBELINEIMAGE = "TubeLineImage";
     private static final String TUBELINEHEXCOLOUR = "TubeLineHexColour";
     private static final String STATUSBARHEXCOLOUR = "StatusBarHexColour";
@@ -55,6 +56,7 @@ public class TubeStatusRecyclerViewAdapter extends RecyclerView.Adapter<TubeStat
 
         Intent intent = new Intent(ctx, TubeLineInfoActivity.class);
         intent.putExtra(TUBELINEOBJECT, tubeLineList.get(position));
+        intent.putExtra(PLANNEDWORKSOBJECT, tubeLinePlannedWorks.get(position));
         intent.putExtra(TUBELINEIMAGE, tubeLineImages.getResourceId(position, 0));
         intent.putExtra(TUBELINEHEXCOLOUR, tubeLineHexColours.get(position));
         intent.putExtra(STATUSBARHEXCOLOUR, statusBarColours.get(position));
