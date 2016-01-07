@@ -17,6 +17,6 @@ public interface TflApiRetrofitInterface {
     @GET("/line/mode/tube/status")
     public void getTubeLineStatus(Callback<List<TubeLine>> callback);
 
-    @GET("/line/{ids}/disruption")
-    public void getTubeLinePlannedDisruptions(@Path("ids") String tubeLineID);
+    @GET("/line/mode/tube/status?startDate={startDate}&endDate={endDate}&detail=true")
+    public void getTubeLinePlannedDisruptions(@Path("startDate") String startDate, @Path("endDate") String endDate);
 }
