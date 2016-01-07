@@ -83,18 +83,25 @@ public class TubeLineInfoActivity extends AppCompatActivity {
 
         tubeLineStatusCVStatusTV = ButterKnife.findById(tubeLineStatusCV, R.id.statusTV);
         tubeLineStatusCVStatusTV.setText(tubeLine.getTubeStatus().get(0).getTubeLineStatus());
+
         tubeLineStatusCVBodyTV = ButterKnife.findById(tubeLineStatusCV, R.id.bodyTV);
+        if(tubeLine.getTubeStatus().get(0).getStatusReason() != null){
+            tubeLineStatusCVBodyTV.setText(tubeLine.getTubeStatus().get(0).getStatusReason());
+        }
 
         //The views within the tube line disruptions card
         tubeLineDisruptionsCVHeaderTV = ButterKnife.findById(tubeLineDisruptionsCV, R.id.headingTV);
         tubeLineDisruptionsCVHeaderTV.setText(getResources().getString(R.string.disruptions));
         tubeLineDisruptionsCVHeaderTV.setTextColor(Color.parseColor(tubeLineColour));
 
-
         tubeLineDisruptionsCVStatusTV = ButterKnife.findById(tubeLineDisruptionsCV, R.id.statusTV);
         tubeLineDisruptionsCVStatusTV.setText(getResources().getString(R.string.noDisruptions));
 
         tubeLineDisruptionsCVBodyTV = ButterKnife.findById(tubeLineDisruptionsCV, R.id.bodyTV);
+
+        //TODO, GET THE PLANNED DISRUPTIONS FROM TFL API AND DISPLAY HERE IF THERE ARE ANY
+
+        //TODO IMPLEMENT PULL DOWN TO REFRESH
     }
 
     @Override

@@ -11,10 +11,12 @@ import java.io.Serializable;
 public class TubeLineStatus implements Serializable {
 
     @SerializedName("statusSeverityDescription")private String tubeLineStatus;
+    @SerializedName("reason")private String statusReason;
 
     //CONSTRUCTOR
-    public TubeLineStatus(String status){
+    public TubeLineStatus(String status, String statusReason){
         setTubeLineStatus(status);
+        setStatusReason(statusReason);
     }
 
     //SETTERS
@@ -22,8 +24,12 @@ public class TubeLineStatus implements Serializable {
         this.tubeLineStatus = tubeLineStatus;
     }
 
+    public void setStatusReason(String reason){ this.statusReason = reason; }
+
     //GETTERS
     public String getTubeLineStatus() {
         return tubeLineStatus;
     }
+
+    public String getStatusReason(){ return  statusReason; }
 }
