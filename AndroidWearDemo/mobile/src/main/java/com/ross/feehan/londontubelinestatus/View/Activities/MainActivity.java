@@ -21,6 +21,7 @@ import com.ross.feehan.londontubelinestatus.Utils.AndroidWearDemoApplication;
 import com.ross.feehan.londontubelinestatus.View.Interfaces.GetTubeLineStatusViewInterface;
 import com.ross.feehan.londontubelinestatus.View.Interfaces.GetTubeLinesPlannedDisruptionsViewInterface;
 import com.ross.feehan.londontubelinestatus.View.Utils.TubeStatusRecyclerViewAdapter;
+import com.splunk.mint.Mint;
 
 import java.util.List;
 
@@ -58,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.londonTubeStatus));
+
+        //Crash reporting
+        Mint.initAndStartSession(MainActivity.this, "0b9cb4ff");
 
         /*//for swipe to refresh
         swipeRefreshLayout.setOnRefreshListener(this);

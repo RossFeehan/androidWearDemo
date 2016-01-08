@@ -19,6 +19,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://mint.splunk.com/gradle/"
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     wearApp project(':wear')
@@ -32,4 +38,5 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.+'
     compile 'com.android.support:design:23.+'
     compile 'com.android.support:cardview-v7:23.+'
+    compile "com.splunk.mint:mint:4.4.0"
 }

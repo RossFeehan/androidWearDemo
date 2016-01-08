@@ -155,6 +155,7 @@
     <orderEntry type="library" exported="" name="play-services-basement-8.3.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-maps-8.3.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-nearby-8.3.0" level="project" />
+    <orderEntry type="library" exported="" name="mint-4.4.0" level="project" />
     <orderEntry type="library" exported="" name="javawriter-2.5.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-fitness-8.3.0" level="project" />
     <orderEntry type="library" exported="" name="dagger-compiler-1.2.2" level="project" />
