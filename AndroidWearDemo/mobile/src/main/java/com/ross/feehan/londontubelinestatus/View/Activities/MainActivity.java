@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ross.feehan.londontubelinestatus.Data.Objects.TubeLine;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     @Bind(R.id.tubeRV) RecyclerView tubeRV;
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
+    @Bind(R.id.noInternetTV) TextView noInternetTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     //GetTubeLineStatusViewInterface methods
     @Override
     public void receiveTubeLineStatus(List<TubeLine> tubeLineStatus) {
+        noInternetTV.setVisibility(View.INVISIBLE);
         this.tubeLineStatusList = tubeLineStatus;
         //now get the planned works
         getPlannedWorks.getTubeLinesPlannedDisruptions(this);
@@ -88,12 +92,14 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
 
     @Override
     public void somethingWentWrong(String message) {
+        noInternetTV.setVisibility(View.VISIBLE);
         Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show();
         swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void noInternetConnection() {
+        noInternetTV.setVisibility(View.VISIBLE);
         Toast.makeText(ctx, "Sorry, no internet connection at the moment", Toast.LENGTH_LONG).show();
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -103,5 +109,6 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
         getTubeStatus.getTubeLineStatus(this);
+        noInternetTV.setVisibility(View.INVISIBLE);
     }
 }

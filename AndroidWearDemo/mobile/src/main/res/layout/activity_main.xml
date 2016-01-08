@@ -28,4 +28,15 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <TextView
+        android:id="@+id/noInternetTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:textColor="#7a0f0e"
+        android:text="@string/noInterent"
+        android:textStyle="bold"
+        android:visibility="invisible"/>
+
 </RelativeLayout>
