@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.londonTubeStatus));
 
-        //for swipe to refresh
+        /*//for swipe to refresh
         swipeRefreshLayout.setOnRefreshListener(this);
 
         //setting the layout manager for the recycler view
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
         tubeRV.setLayoutManager(recyclerViewLayoutManager);
 
         //the tube line status
-        getTubeStatus.getTubeLineStatus(this);
+        getTubeStatus.getTubeLineStatus(this);*/
     }
 
     //INTERFACE METHODS
@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     @Override
     public void receiveTubeLineStatus(List<TubeLine> tubeLineStatus) {
         noInternetTV.setVisibility(View.INVISIBLE);
-        loadingLayout.setVisibility(View.INVISIBLE);
 
         this.tubeLineStatusList = tubeLineStatus;
         //now get the planned works
@@ -86,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     //GetTubeLinesPlannedDisruptionsViewInterface INTERFACE METHODS
     @Override
     public void receiveTubeLinePlannedDisruptions(List<TubeLinePlannedWork> tubeLinePlannedWorks) {
+        loadingLayout.setVisibility(View.INVISIBLE);
 
         tubeRV.setAdapter(new TubeStatusRecyclerViewAdapter(ctx, tubeLineStatusList, tubeLinePlannedWorks));
 
@@ -116,5 +116,21 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
         swipeRefreshLayout.setRefreshing(true);
         getTubeStatus.getTubeLineStatus(this);
         noInternetTV.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        //for swipe to refresh
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+        //setting the layout manager for the recycler view
+        //Creating the layout of the recycler view (linearlayout creates a list view like recycler view)
+        LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(ctx);
+        tubeRV.setLayoutManager(recyclerViewLayoutManager);
+
+        //the tube line status
+        getTubeStatus.getTubeLineStatus(this);
     }
 }
