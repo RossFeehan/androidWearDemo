@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -61,17 +62,19 @@ public class TubeLine implements Serializable {
     public static ArrayList<DataMap> convertToDataMap(List<TubeLine> tubeLineStatus){
         Log.i("TubeLine", "Converting to DataMap ArrayList");
         ArrayList<DataMap> tubeLinesDM = new ArrayList<DataMap>();
+        Calendar c = Calendar.getInstance();
 
         for(TubeLine tubeLine : tubeLineStatus){
             DataMap dm = new DataMap();
             dm.putString(TUBE_LINE_NAME_KEY, tubeLine.getTubeName());
             dm.putString(TUBE_LINE_STATUS_KEY, tubeLine.getTubeStatus().get(0).getTubeLineStatus());
             dm.putString(TUBE_LINE_STATUS_REASON_KEY, tubeLine.getTubeStatus().get(0).getStatusReason());
-            dm.putLong(TUBE_LINE_STATUS_UPDATE_TIME_KEY, new Date().getTime());
+            //dm.putLong(TUBE_LINE_STATUS_UPDATE_TIME_KEY, System.currentTimeMillis());
 
             tubeLinesDM.add(dm);
         }
 
+        tubeLinesDM.get(0).putLong(TUBE_LINE_STATUS_UPDATE_TIME_KEY, System.currentTimeMillis());
         return tubeLinesDM;
     }
 }
