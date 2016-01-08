@@ -72,8 +72,8 @@ public class GetTubeLineStatusImpl implements GetTubeLineStatusInterface{
             @Override
             public void failure(RetrofitError error) {
                 //Notify the calling class if there was a networking error
-                if(error.getKind().equals(NETWORKERROR)){
-                   listenerClass.noInternetConnection();
+                if(error.getKind().toString().equals(NETWORKERROR)) {
+                    listenerClass.noInternetConnection();
                 }
                 else{
                     //Notify the calling class that there was an error

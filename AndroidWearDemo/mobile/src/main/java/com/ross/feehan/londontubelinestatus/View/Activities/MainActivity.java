@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
 
     @Override
     public void somethingWentWrong(String message) {
+        Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show();
         swipeRefreshLayout.setRefreshing(false);
     }
 
