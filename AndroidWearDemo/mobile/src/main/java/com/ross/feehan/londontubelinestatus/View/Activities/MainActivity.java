@@ -1,6 +1,5 @@
 package com.ross.feehan.londontubelinestatus.View.Activities;
 
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
     @Bind(R.id.noInternetTV) TextView noInternetTV;
+    @Bind(R.id.loadingLayout) RelativeLayout loadingLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     @Override
     public void receiveTubeLineStatus(List<TubeLine> tubeLineStatus) {
         noInternetTV.setVisibility(View.INVISIBLE);
+        loadingLayout.setVisibility(View.INVISIBLE);
+
         this.tubeLineStatusList = tubeLineStatus;
         //now get the planned works
         getPlannedWorks.getTubeLinesPlannedDisruptions(this);
@@ -92,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     @Override
     public void somethingWentWrong(String message) {
         noInternetTV.setVisibility(View.VISIBLE);
+        loadingLayout.setVisibility(View.INVISIBLE);
+
         Toast.makeText(ctx, message, Toast.LENGTH_SHORT).show();
         swipeRefreshLayout.setRefreshing(false);
     }
@@ -99,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     @Override
     public void noInternetConnection() {
         noInternetTV.setVisibility(View.VISIBLE);
+        loadingLayout.setVisibility(View.INVISIBLE);
+
         Toast.makeText(ctx, "Sorry, no internet connection at the moment", Toast.LENGTH_LONG).show();
         swipeRefreshLayout.setRefreshing(false);
     }
