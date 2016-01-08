@@ -21,6 +21,7 @@ public class TubeLine implements Serializable {
     @SerializedName("lineStatuses") private List<TubeLineStatus> tubeStatus;
     private static final String TUBE_LINE_NAME_KEY = "TubeLineName";
     private static final String TUBE_LINE_STATUS_KEY = "TubeLineStatus";
+    private static final String TUBE_LINE_STATUS_REASON_KEY = "TubeLineStatusReason";
     private static final String TUBE_LINE_STATUS_UPDATE_TIME_KEY = "UpdateTime";
 
     //CONSTRUCTOR
@@ -65,6 +66,7 @@ public class TubeLine implements Serializable {
             DataMap dm = new DataMap();
             dm.putString(TUBE_LINE_NAME_KEY, tubeLine.getTubeName());
             dm.putString(TUBE_LINE_STATUS_KEY, tubeLine.getTubeStatus().get(0).getTubeLineStatus());
+            dm.putString(TUBE_LINE_STATUS_REASON_KEY, tubeLine.getTubeStatus().get(0).getStatusReason());
             dm.putLong(TUBE_LINE_STATUS_UPDATE_TIME_KEY, new Date().getTime());
 
             tubeLinesDM.add(dm);

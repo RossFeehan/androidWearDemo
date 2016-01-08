@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
+
+            <ImageView
+                android:id="@+id/tubeLineIV"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/statusTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/tubeLineIV"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:text="asdfafafafd"
+                android:textColor="#474e53"/>
+
+            <TextView
+                android:id="@+id/reasonTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statusTV"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="18sp"
+                android:text="asdaadasdasdasdasddasadadadadasdadadasdasdadsddqffddqdqdqdqdqdqwdqdqfqfqdqdsadasasd"
+                android:textColor="#474e53"/>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -13,4 +13,19 @@
         <item>@drawable/victoria</item>
         <item>@drawable/waterloo</item>
     </array>
+
+    <string-array name="tubeLineColours">
+        <item>#573011</item>
+        <item>#911211</item>
+        <item>#E2B113</item>
+        <item>#00875F</item>
+        <item>#C55D6E</item>
+        <item>#535B61</item>
+        <item>#612244</item>
+        <item>#0B0B0B</item>
+        <item>#003872</item>
+        <item>#0090CD</item>
+        <item>#54AAB7</item>
+    </string-array>
+
 </resources>

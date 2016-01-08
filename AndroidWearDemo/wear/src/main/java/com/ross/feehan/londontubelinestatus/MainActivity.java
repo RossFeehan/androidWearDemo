@@ -35,6 +35,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
     private static final String NO_INTERNET_ACCESS_KEY = "/NoInternetAccessKey";
     private static final String SOME_THING_WENT_WRONG_KEY = "/SomeThingWentWrongKey";
     private static final String TUBE_LINE_STATUS_KEY = "/TubeLineStatusKey";
+    private static final String TUBE_LINE_STATUS_REASON_KEY = "/TubeLineStatusReason";
     private Node node;
 
     @Bind(R.id.wearable_list) WearableListView listView;
