@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
         swipeRefreshLayout.setOnRefreshListener(this);
 
         //setting the layout manager for the recycler view
+        //Creating the layout of the recycler view (linearlayout creates a list view like recycler view)
         LinearLayoutManager recyclerViewLayoutManager = new LinearLayoutManager(ctx);
         tubeRV.setLayoutManager(recyclerViewLayoutManager);
 
@@ -82,8 +83,6 @@ public class MainActivity extends AppCompatActivity implements GetTubeLineStatus
     //GetTubeLinesPlannedDisruptionsViewInterface INTERFACE METHODS
     @Override
     public void receiveTubeLinePlannedDisruptions(List<TubeLinePlannedWork> tubeLinePlannedWorks) {
-        //Creating the layout of the recycler view (linearlayout creates a list view like recycler view)
-
 
         tubeRV.setAdapter(new TubeStatusRecyclerViewAdapter(ctx, tubeLineStatusList, tubeLinePlannedWorks));
 

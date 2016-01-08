@@ -26,6 +26,7 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"/>
 
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <TextView
@@ -38,5 +39,6 @@
         android:text="@string/noInterent"
         android:textStyle="bold"
         android:visibility="invisible"/>
+
 
 </RelativeLayout>
